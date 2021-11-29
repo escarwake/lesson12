@@ -1,9 +1,10 @@
-@calculator
+@unit @calculator
 Feature: Full Retirement Calculator 
   As a user, 
   I want to be told my full retirement age,
   based on my birth month and year. 
  
+ @basic
  Scenario Outline: Basic Retirement Age Calculation
   Given the calculator is provided with "<birth-year>"
   Then the response contains the associated "<year>" 
@@ -27,4 +28,15 @@ Feature: Full Retirement Calculator
     | 1959       | 66   | 10    |
     | 1960       | 67   | 0     |
     | 2021       | 67   | 0     |
-    
+   
+    @exit
+    Scenario: Retirement Calculation Exit
+      Given the user enters <"0">
+      Then the program exits. 
+     
+    @bounds 
+    Scenario Outline: Out-of-Bounds Year 
+      Given the user enters invalid year
+      When the program executes 
+      Then an error message is displayed. 
+      
